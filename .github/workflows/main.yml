@@ -1,7 +1,10 @@
-name: Build and Test Xcode Project
-
-on: [push, pull_request]
-
+name: XCUITest iOS Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+    
 jobs:
   build:
     runs-on: macos-latest
