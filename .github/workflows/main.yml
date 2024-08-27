@@ -23,7 +23,7 @@ jobs:
       - name: Build and Test
         run: |
           xcodebuild test \
-            -workspace Calculator_UI.xcodeproj/project.xcworkspace \
+            -workspace Calculator_UI.xcworkspace \
             -scheme YourTestScheme \
             -destination 'platform=iOS Simulator,name=iPhone 15 Pro Max' \
             -only-testing:UITests
