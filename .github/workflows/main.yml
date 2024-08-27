@@ -11,8 +11,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode_version: [ latest-stable, 14 ]
-    runs-on: macos-13
+        xcode_version: [ latest, 14 ]
+        arch: [ x86_64, arm64 ]  # Desteklenen mimarileri ekledim
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -23,4 +24,4 @@ jobs:
         xcode-version: ${{ matrix.xcode_version }}
 
     - name: Build
-      run: swift build -v -c release --triple ${{ matrix.arch }}
+      run: swift build -v -c release --arch ${{ matrix.arch }}  # Mimariyi doğru kullandık
