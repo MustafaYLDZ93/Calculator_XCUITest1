@@ -1,0 +1,29 @@
+name: Run Xcode UI Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Xcode
+      uses: apple-actions/setup-xcode@v2
+      with:
+        xcode-version: '14.3'
+
+    - name: Build and test
+      run: |
+        xcodebuild -workspace YourWorkspace.xcworkspace \
+                   -scheme YourScheme \
+                   -destination 'platform=iOS Simulator,name=iPhone 14' \
+                   test
