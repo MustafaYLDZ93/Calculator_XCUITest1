@@ -28,6 +28,7 @@
 		512F3EBC269DC75D001D1F23 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512F3EBB269DC75D001D1F23 /* StringExtensions.swift */; };
 		CF9A102B2C7B59580046F143 /* UITests_Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9A102A2C7B59580046F143 /* UITests_Calculator.swift */; };
 		CF9A102D2C7B59580046F143 /* UITests_CalculatorLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9A102C2C7B59580046F143 /* UITests_CalculatorLaunchTests.swift */; };
+		CFCF56682C7DF21100060ECA /* github_workflow.yml in Resources */ = {isa = PBXBuildFile; fileRef = CFCF56672C7DF21100060ECA /* github_workflow.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		CF9A10282C7B59580046F143 /* UITests_Calculator.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests_Calculator.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9A102A2C7B59580046F143 /* UITests_Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests_Calculator.swift; sourceTree = "<group>"; };
 		CF9A102C2C7B59580046F143 /* UITests_CalculatorLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests_CalculatorLaunchTests.swift; sourceTree = "<group>"; };
+		CFCF56672C7DF21100060ECA /* github_workflow.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = github_workflow.yml; path = ../../../Downloads/github_workflow.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 		512F3E792699CAE2001D1F23 /* Calculator_UI */ = {
 			isa = PBXGroup;
 			children = (
+				CFCF56662C7DF02700060ECA /* .github */,
 				512F3E8D2699CC2B001D1F23 /* Extensions */,
 				512F3E892699CB9F001D1F23 /* Code */,
 				512F3E8E269AD113001D1F23 /* Utils */,
@@ -235,6 +238,14 @@
 			path = UITests_Calculator;
 			sourceTree = "<group>";
 		};
+		CFCF56662C7DF02700060ECA /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				CFCF56672C7DF21100060ECA /* github_workflow.yml */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -315,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFCF56682C7DF21100060ECA /* github_workflow.yml in Resources */,
 				512F3EB0269AE5D3001D1F23 /* Ubuntu-Bold.ttf in Resources */,
 				512F3E99269ADB6A001D1F23 /* EurostileExtendedBlack.ttf in Resources */,
 				512F3EB1269AE5D3001D1F23 /* Ubuntu-Light.ttf in Resources */,
