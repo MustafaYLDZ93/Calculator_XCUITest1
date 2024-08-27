@@ -1,31 +1,30 @@
-name: Run Calculator Tests
+name: Xcode CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main  # Veya ana branch'ınızın adı
   pull_request:
-    branches: [ main ]
+    branches:
+      - main  # Veya ana branch'ınızın adı
 
 jobs:
-  run-tests:
-    runs-on: macOS-latest
+  build-and-test:
+    runs-on: macos-latest
+    
     steps:
-      - uses: actions/checkout@v3
-      - name: Cache Xcode
-        uses: actions/cache@v3
-        with:
-          path: ~/Library/Developer
-          key: ${{ runner.os }}-xcode-${{ hashFiles('**/xcode-version') }}
-          restore-keys: |
-            ${{ runner.os }}-xcode-
-      - name: Use Xcode
-        run: xcode-select --version
-      - name: Build and Test
-        run: |
-          xcodebuild test \
-            -workspace Calculator_UI.xcworkspace \
-            -scheme Calculator_UI \
-            -destination "platform=iOS Simulator,name=iPhone 15 Pro Max" \
-             "-only-testing:UITests_Calculator"
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Xcode
+      uses: apple-actions/setup-xcode@v2
+      with:
+        xcode-version: '14.0'  # Xcode sürümünü ihtiyaçlarınıza göre ayarlayın
 
-            
+    - name: Build and run tests
+      run: |
+        xcodebuild -workspace Calculator_XCUITest1.xcworkspace \
+                   -scheme Calculator_XCUITest1 \
+                   -sdk iphonesimulator \
+                   -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' \
+                   test | xcpretty
