@@ -1,29 +1,24 @@
-name: Run Xcode UI Tests
+name: Build and Test Xcode Project
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: macos-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      
+      - name: Set up Xcode
+        uses: apple/actions/setup-xcode@v1
+        with:
+          xcode-version: '15.4'  # İstediğiniz Xcode sürümünü belirtin
 
-    - name: Set up Xcode
-      uses: apple/actions/setup-xcode@v1
-      with:
-        xcode-version: '15.4'
+      - name: Install Dependencies
+        run: swift package resolve
 
-    - name: Build and test
-      run: |
-        xcodebuild -workspace YourWorkspace.xcworkspace \
-                   -scheme YourScheme \
-                   -destination 'platform=iOS Simulator,name=iPhone 15' \
-                   test
+      - name: Build Project
+        run: xcodebuild -scheme YourSchemeName build
+
+      - name: Run Tests
+        run: xcodebuild -scheme YourSchemeName -destination 'platform=iOS Simulator,name=iPhone 15 Pro' test
