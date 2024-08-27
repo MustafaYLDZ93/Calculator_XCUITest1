@@ -1,27 +1,27 @@
-name: XCUITest iOS Tests
+name: CI
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
-    
+    branches: [ main ]
+
 jobs:
   build:
-    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode_version: [ latest-stable, 14 ]
+        arch: [ "arm64-apple-macosx", "x86_64-apple-macosx" ]
+    runs-on: macos-13
 
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Set up Xcode
-        uses: apple/actions/setup-xcode@v1
-        with:
-          xcode-version: '15.4'  # İstediğiniz Xcode sürümünü belirtin
+    - uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: swift package resolve
+    - name: Setup Xcode version
+      uses: maxim-lobanov/setup-xcode@v1.6.0        
+      with:
+        xcode-version: ${{ matrix.xcode_version }}
 
-      - name: Build Project
-        run: xcodebuild -scheme YourSchemeName build
-
-      - name: Run Tests
-        run: xcodebuild -scheme YourSchemeName -destination 'platform=iOS Simulator,name=iPhone 15 Pro' test
+    - name: Build
+      run: swift build -v -c release --triple ${{ matrix.arch }}
