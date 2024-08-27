@@ -1,4 +1,4 @@
-name: CI
+name: Run Calculator Tests
 
 on:
   push:
@@ -7,21 +7,23 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    strategy:
-      fail-fast: false
-      matrix:
-        xcode_version: [ latest, 14 ]
-        arch: [ x86_64, arm64 ]  # Desteklenen mimarileri ekledim
-    runs-on: macos-latest
-
+  run-tests:
+    runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Setup Xcode version
-      uses: maxim-lobanov/setup-xcode@v1.6.0        
-      with:
-        xcode-version: ${{ matrix.xcode_version }}
-
-    - name: Build
-      run: swift build -v -c release --arch ${{ matrix.arch }}  # Mimariyi doğru kullandık
+      - uses: actions/checkout@v3
+      - name: Cache Xcode
+        uses: actions/cache@v3
+        with:
+          path: ~/Library/Developer
+          key: ${{ runner.os }}-xcode-${{ hashFiles('**/xcode-version') }}
+          restore-keys: |
+            ${{ runner.os }}-xcode-
+      - name: Use Xcode
+        run: xcode-select --version
+      - name: Build and Test
+        run: |
+          xcodebuild test \
+            -workspace YourWorkspace.xcworkspace \
+            -scheme YourTestScheme \
+            -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max' \
+            -only-testing:UITests
